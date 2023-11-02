@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  web:
+    container_name: week2-ez-unserialize
+    build: .
+    ports:
+      - "50023:80"
+    environment:
+      - FLAG=0xGame{4d961b66-fdbb-410f-9955-558d14f1e308}

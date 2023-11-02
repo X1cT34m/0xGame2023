@@ -1,0 +1,85 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/simple.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/static/main.js"></script>
+    <title>Go Shop</title>
+</head>
+<body>
+
+<div>
+    <h1>Go Shop</h1>
+    <div>
+        <p class="notice" id="notice" hidden></p>
+        <i>Buy anything you want!</i>
+        <p>
+            User: <code id="code-user"></code>
+            <br />
+            Money: <code id="code-money"></code>
+            <br />
+        </p>
+
+        <button onclick="getflag()">Get Flag</button>
+        <button onclick="reset()">Reset</button>
+        <br />
+
+        <div id="item-div" hidden>
+            <p></p>
+            <ul>
+            </ul>
+        </div>
+
+        Select a product to buy or sell
+        <table>
+            <thead>
+            <th style="text-align: center">Name</th>
+            <th style="text-align: center">Price</th>
+            <th style="text-align: center">Number</th>
+            <th style="text-align: center">Action</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Apple</td>
+                <td>10</td>
+                <td><input type="number" id="Apple-num" style="width: 100px;" /></td>
+                <td>
+                    <button onclick="buy('Apple')">Buy</button>
+                    <button onclick="sell('Apple')">Sell</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Banana</td>
+                <td>50</td>
+                <td><input type="number" id="Banana-num" style="width: 100px;" /></td>
+                <td>
+                    <button onclick="buy('Banana')">Buy</button>
+                    <button onclick="sell('Banana')">Sell</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Orange</td>
+                <td>100</td>
+                <td><input type="number" id="Orange-num" style="width: 100px;" /></td>
+                <td>
+                    <button onclick="buy('Orange')">Buy</button>
+                    <button onclick="sell('Orange')">Sell</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Flag</td>
+                <td>999999999</td>
+                <td><input type="number" id="Flag-num" style="width: 100px;" /></td>
+                <td>
+                    <button onclick="buy('Flag')">Buy</button>
+                    <button onclick="sell('Flag')">Sell</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+<script>
+
+</script>
+</html>

@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="simple.css">
+        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <title>Ping</title>
+    </head>
+
+    <body>
+        <div>
+            <div style="text-align: center;">
+                <h1>Ping</h1>
+                <div>
+                    <form onsubmit="process(); return false">
+                        <input type="text" name="ip" id="ip" placeholder="127.0.0.1" pattern="((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])" title="IPv4 Address" required />
+                        <input type="submit" value="Ping" />
+                    </form>
+                </div>
+
+                <pre id="result" hidden><code></code></pre>
+            </div>
+        </div>
+        <!-- visit '/api.php?source' for hint -->
+    </body>
+    <script>
+        function process() {
+            let ip = $('#ip').val();
+            $.post('api.php', {ip: ip}, function (data) {
+                $('#result>code').text(data);
+                $('#result').show();
+            })
+        }
+    </script>
+</html>

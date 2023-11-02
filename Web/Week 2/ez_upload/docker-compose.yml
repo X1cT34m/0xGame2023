@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  web:
+    container_name: week2-ez-upload
+    build: .
+    ports:
+      - "50022:80"

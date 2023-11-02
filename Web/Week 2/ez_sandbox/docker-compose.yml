@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  web:
+    container_name: week2-ez-sandbox
+    restart: always
+    build: .
+    ports:
+      - "50024:3000"

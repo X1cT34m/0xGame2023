@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    </head>
+    <body>
+        <main class="container">
+            <hgroup>
+                <h1>
+                    Zip File Manager
+                </h1>
+                <h2>Your upload path is <code>{{ upload_path }}</code></h2>
+            </hgroup>
+            
+            <form action="/unzip" method="post" enctype="multipart/form-data">
+                <div class="grid">
+                    <div>
+                        Upload a zip file: <input type="file" name="file" onchange="this.form.submit()">
+                    </div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </form>
+            <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for v in res %}
+                    <tr>
+                        <th scope="row">
+                            {% if v.type == 'File' %}
+                            <a href="{{ v.name }}">{{ v.name }}</a>
+                            {% else %}
+                            <a href="{{ v.name }}/">{{ v.name }}</a>
+                            {% endif %}
+                        </th>
+                        <td>{{ v.type }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </main>
+    </body>
+</html>

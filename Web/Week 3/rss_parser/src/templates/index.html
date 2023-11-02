@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"> 
+        <title>RSS Parser</title>
+        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.min.js"></script>
+        <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container pt-5 p-5 my-5 border">
+            <h1>RSS Parser</h1>
+            <p>Enter a RSS feed url and we will resolve the recent posts on the website for you.</p>
+            <form action="" method="post">
+                <input type="text" class="form-control" placeholder="https://exp10it.cn/index.xml" name="url" value="{% if feed_url is defined %}{{ feed_url }}{% endif %}" />
+                <br />
+                <input type="submit" value="Submit" class="btn btn-primary"/>
+            </form>
+            {% if result is defined %}
+            <br />
+            <h4>Info</h4>
+            <ul>
+                <li>
+                    Title: {{ result.title }}
+                </li>
+                <li>
+                    Link: <a href="{{ result.link }}" target="_blank">{{ result.link }}</a>
+                </li>
+            </ul>
+            <h4>Posts</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in result.posts %}
+                    <tr>
+                        <td>{{ post.title }}</td>
+                        <td><a href="{{ post.link }}" target="_blank">{{ post.link }}</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        <div>
+    </body>
+</html>

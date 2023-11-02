@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  web:
+    container_name: week1-ping
+    build: .
+    ports:
+      - "50015:80"

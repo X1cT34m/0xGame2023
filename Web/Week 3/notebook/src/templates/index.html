@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>Notebook</title>
+        <link rel="stylesheet" type="text/css" href="/static/simple.css">
+        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <h1>Notebook</h1>
+            <p>Manage your notes!</p>
+
+            {% if status == 'add_success' %}
+                <p class="notice" id="notice">Add note success! Link: <a href="/{{note_id}}" target="_blank">/{{note_id}}</a></p>
+            {% elif status == 'add_failed' %}
+                <p class="notice" id="notice">Add note failed! Error: {{msg}}</a></p>
+            {% elif status == 'delete_success' %}
+                <p class="notice" id="notice">Delete note success!</a></p>
+            {% elif status == 'delete_failed' %}
+                <p class="notice" id="notice">Delete note failed! Error: {{msg}}</a></p>
+            {% else %}
+            {% endif %}
+
+            <form action="/add_note" method="post">
+                <label>Name:</label>
+                <input type="text" name="note_name" placeholder="Your note name">
+                <label>Content:</label>
+                <textarea name="note_content" rows="6" placeholder="Your note content"></textarea>
+                <input type="submit" value="Add a note" />
+            </form>
+        </div>
+    </body>
+</html>

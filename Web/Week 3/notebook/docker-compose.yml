@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  web:
+    container_name: week3-note-book
+    build: .
+    ports:
+      - "50031:8000"

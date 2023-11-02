@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"> 
+        <title>Sandbox</title>
+        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+        <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container p-5 my-5 border">
+            <h1>Sandbox</h1>
+            <p>
+                User: <code id="user"></code>
+                <br />
+                Role: <code id="role"></code>
+                <br />
+                <a href="/logout">Logout</a>
+            </p>
+            <textarea class="form-control" rows="5" id="code" placeholder="7*7;"></textarea>
+            <br />
+            <button type="button" class="btn btn-primary" onclick="run()">Run</button>
+            <br /><br />
+            <div">
+                Result: 
+                <textarea class="form-control" rows="5" id="result" placeholder="Code result will be displayed here." readonly></textarea>
+            </div>
+        </div>
+    </body>
+    <script>
+        $.get('/profile', function(data) {
+            $('#user').text(data.user);
+            $('#role').text(data.role);
+        })
+
+        function run() {
+            let code = $('#code').val();
+            $.ajax({
+                url: '/sandbox',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    code: code
+                }),
+                success: function(data) {
+                    $('#result').val(data.result);
+                }
+            })
+        }
+    </script>
+</html>

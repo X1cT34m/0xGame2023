@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  web:
+    container_name: week4-test-connection
+    build: .
+    restart: always
+    ports:
+      - "50044:8081"
+    environment:
+      - flag=0xGame{17fe878f-cbe3-4bc6-aca9-340fbc61f160}
