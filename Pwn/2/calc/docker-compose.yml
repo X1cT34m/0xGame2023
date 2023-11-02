@@ -1,0 +1,8 @@
+version: '3'
+services:
+  0xgame2023-w5t1:
+    image: "0xgame2023:w5t1"
+    restart: always
+    container_name: 0xGame2023-w5t1
+    ports:
+      - "55001:9999"

@@ -1,0 +1,13 @@
+version: '3'
+services:
+  0xgame2023-w4t0:
+    image: "0xgame2023:w4t0"
+    restart: always
+    container_name: 0xGame2023-w4t0
+    ports:
+      - "54000:9999"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 512M
