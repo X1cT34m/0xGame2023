@@ -1,0 +1,30 @@
+stages:
+    - cleanup
+    - build
+    - run
+    - push
+
+cleanup-job:
+    stage: cleanup
+    tags: ["local"]
+    script:
+        - "docker compose down"
+
+build-job:
+    stage: build
+    tags: ["local"]
+    script:
+        - "chmod +x build.sh"
+        - "./build.sh"
+
+run-job:
+    stage: run
+    tags: ["local"]
+    script:
+        - "docker compose up -d"
+
+push-job:
+    stage: push
+    tags: ["local"]
+    script:
+        - "docker push registry.cn-hangzhou.aliyuncs.com/0xgame2023/0xgame2023:w2t1"
