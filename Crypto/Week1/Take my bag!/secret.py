@@ -1,0 +1,1 @@
+flag = b'0xGame{Welc0me_2_Crypt0_G@me!#$&%}'

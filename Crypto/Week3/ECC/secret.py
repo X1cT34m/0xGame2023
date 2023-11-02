@@ -1,0 +1,1 @@
+msg = b"Al1ce_L0ve_B0b"
