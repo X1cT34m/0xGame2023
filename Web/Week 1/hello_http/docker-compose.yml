@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  web:
+    container_name: week1-hello-http
+    image: php:7.4-apache
+    ports:
+      - "50012:80"
+    volumes:
+      - ./src:/var/www/html/

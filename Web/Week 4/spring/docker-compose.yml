@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  web:
+    container_name: week4-spring
+    build: .
+    ports:
+      - "50041:8081"

@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  web:
+    container_name: week2-ez-sqli-web
+    build: .
+    restart: always
+    ports:
+      - "50021:8000"
+    depends_on:
+      - db
+
+  db:
+    container_name: week2-ez-sqli-db
+    hostname: db
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=ctf
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d/

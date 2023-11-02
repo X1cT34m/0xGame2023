@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Notebook</title>
+        <link rel="stylesheet" type="text/css" href="/static/simple.css">
+        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <h1>View note</h1>
+            {% if msg %}
+                <p class="notice" id="notice">{{msg}}</p>
+            {% else %}
+                <p>
+                    Note ID: <code>{{note_id}}</code>
+                </p>
+                <article>
+                    <h2>{{note_name}}</h2>
+                    <p>{{note_content}}</p>
+                </article>
+
+                <form action="/delete_note" method="post">
+                    <input type="hidden" name="note_id" value="{{note_id}}" />
+                    <input type="submit" value="Delete note" />
+                </form>
+            {% endif %}
+        </div>
+    </body>
+</html>

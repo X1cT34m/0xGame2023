@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    </head>
+
+    <body>
+        <main class="container">
+            <hgroup>
+                <h2>User Info</h2>
+                <h3>Hello world</h3>
+              </hgroup>
+              <nav>
+                <details role="list">
+                    <summary aria-haspopup="listbox" role="link">Order by</summary>
+                    <ul role="listbox">
+                      <li><a href="?order=id">ID</a></li>
+                      <li><a href="?order=name">Name</a></li>
+                      <li><a href="?order=email">Email</a></li>
+                    </ul>
+                  </details>
+              </nav>
+            <table>
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Password</th>
+                  </tr>
+                </thead>
+                <tbody>
+    
+                {% for row in res %}
+                  <tr>
+                    <th scope="row">{{ row[0] }}</th>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                  </tr>
+                  {% endfor %}
+                </tfoot>
+              </table>
+
+              <footer>
+                <small>
+                    Powered by 0xGame 2023
+                </small>
+              </footer>
+        </main>
+    </body>
+</html>

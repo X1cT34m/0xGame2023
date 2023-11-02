@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  web:
+    container_name: week1-repo-leak
+    image: nginx
+    ports:
+      - "50013:80"
+    volumes:
+      - ./dist:/usr/share/nginx/html
+      

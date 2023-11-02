@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  web:
+    container_name: week4-your-batis-web
+    build: .
+    restart: always
+    ports:
+      - "50043:8081"
+    environment:
+      - flag=0xGame{18cb86b1-2272-4da0-b2e7-89f0771d329b}
+
+  db:
+    container_name: week4-your-batis-db
+    hostname: db
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=ctf
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d/

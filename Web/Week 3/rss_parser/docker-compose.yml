@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  web:
+    container_name: week3-rss-parser
+    build: .
+    ports:
+      - "50032:8000"
