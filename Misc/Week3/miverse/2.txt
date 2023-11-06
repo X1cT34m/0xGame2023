@@ -1,0 +1,11 @@
+A:你猜我最喜欢的编程语言是什么，提示一下，语言的名字有3个字符，并且其中的两个基本是一样的
+
+B:这不是一眼丁真,C++吗不是
+
+A:不不不，不是，是这个(掏出miverse.txt)
+
+B:啊？
+
+[附件](/static/upload/files/84121676708cdd33b6c4f4a687a23ec7.zip)
+
+0xGame{Just_Reverse_OoK!}
