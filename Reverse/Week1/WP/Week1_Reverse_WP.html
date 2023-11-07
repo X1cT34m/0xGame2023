@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Reverse</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="reverse">Reverse</h1>
+<h2 id="数字筑基">数字筑基</h2>
+<p>根据程序要求，我们需要将如下内容转换为其十六进制形式。这里用到这个工具</p>
+<p><a href="https://gchq.github.io/CyberChef/">在线工具</a></p>
+<p><s>可能你需要能访问谷歌才可以打开这个工具</s>。</p>
+<p><img src="file:///d:\CTF\2023\0xGame\Week1\WP\1.png" alt="工具界面1"></p>
+<p>利用该工具拿到十六进制的字符串，输入程序，即可拿到flag。(题目描述的16进制形式可能存在歧义。最终输入应该是ASCII字符串(如30=='0'))</p>
+<h2 id="代码金丹">代码金丹</h2>
+<p>拿到程序后，我们可以用IDA打开，F5反编译main函数后，可以看到如下内容</p>
+<p><img src="file:///d:\CTF\2023\0xGame\Week1\WP\2.png" alt="IDA界面2"></p>
+<p>由此，得到flag</p>
+<h2 id="网络元婴">网络元婴</h2>
+<p>拿到程序后，仿照第三题用IDA打开，F5反编译main函数后，可以看到如下内容。</p>
+<p><img src="file:///d:\CTF\2023\0xGame\Week1\WP\3.png" alt="IDA界面3"></p>
+<p>由此，可以将每一位拼接，从而获得flag，也可以动态调试，复制最终拼接好的flag。</p>
+<h2 id="虚拟化神">虚拟化神</h2>
+<p>拿到程序，运行发现是重启验证(输入注册码后不直接解锁功能，需要下次启动软件才会生效)。</p>
+<p>观察可以发现，程序在验证完毕、重启之前会在同目录下创建config.txt。</p>
+<p>根据其内容发现输入错误为0(false)，将其改为1(true)，再次运行程序，即可获得flag。</p>
+<p><img src="file:///d:\CTF\2023\0xGame\Week1\WP\4.png" alt="IDA界面4"></p>
+<p>当然，我们IDA分析一下也能发现，程序会解密出内置的flag，然后和输入进行比较，所以动态调试也可以拿到flag。</p>
+<h2 id="赛博天尊">赛博天尊</h2>
+<p>拿到程序，丢入IDA分析，可以看到如下结果</p>
+<p><img src="file:///d:\CTF\2023\0xGame\Week1\WP\5.png" alt="IDA界面5"></p>
+<p>可以发现输入的flag按-分割，转换成整数后需要满足特定方程，提取出方程后求解即可。</p>
+<pre><code class="language-python"><span class="hljs-keyword">from</span> sympy <span class="hljs-keyword">import</span> symbols, Eq, solve
+
+v7, v8, v9, v10, v11 = symbols(<span class="hljs-string">&#x27;v7 v8 v9 v10 v11&#x27;</span>)
+
+equations = [
+    Eq(<span class="hljs-number">7</span> * v9 + <span class="hljs-number">5</span> * (v8 + v11) + <span class="hljs-number">2</span> * (v10 + <span class="hljs-number">4</span> * v7), <span class="hljs-number">0x12021DE669FC2</span>),
+    Eq(v9 + v10 + <span class="hljs-number">2</span> * v10 + <span class="hljs-number">2</span> * (v11 + v7) + v8, <span class="hljs-number">0x159BFFC17D045</span> -
+       <span class="hljs-number">2</span> * (v9 + v10 + <span class="hljs-number">2</span> * v10 + <span class="hljs-number">2</span> * (v11 + v7))),
+    Eq(v10 + v9 + v11 + <span class="hljs-number">2</span> * v9 + <span class="hljs-number">2</span> * (v9 + v11 + <span class="hljs-number">2</span> * v9) +
+       <span class="hljs-number">2</span> * (v8 + <span class="hljs-number">4</span> * v7), <span class="hljs-number">0xACE320D12501</span>),
+    Eq(v8 + <span class="hljs-number">2</span> * (v7 + v11 + v9 + <span class="hljs-number">2</span> * v10), <span class="hljs-number">0x733FFEB3A4FA</span>),
+    Eq(v8 + <span class="hljs-number">7</span> * v11 + <span class="hljs-number">8</span> * (v9 + v10) + <span class="hljs-number">5</span> * v7, <span class="hljs-number">0x1935EBA54EB28</span>)
+]
+
+solutions = solve(equations)
+
+sorted_solutions = {k: <span class="hljs-built_in">hex</span>(v) <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> <span class="hljs-built_in">sorted</span>(
+    solutions.items(), key=<span class="hljs-keyword">lambda</span> item: <span class="hljs-built_in">int</span>(<span class="hljs-built_in">str</span>(item[<span class="hljs-number">0</span>])[<span class="hljs-number">1</span>:]))}
+
+formatted_sorted_hex_solution = <span class="hljs-string">f&quot;0xGame{{<span class="hljs-subst">{<span class="hljs-string">&#x27;-&#x27;</span>.join([val[<span class="hljs-number">2</span>:] <span class="hljs-keyword">for</span> val <span class="hljs-keyword">in</span> sorted_solutions.values()])}</span>}}&quot;</span>
+
+<span class="hljs-built_in">print</span>(formatted_sorted_hex_solution)
+
+</code></pre>
+<p>运行如上脚本即可得到flag。</p>
+
+        
+        
+    </body>
+    </html>
